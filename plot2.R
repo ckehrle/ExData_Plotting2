@@ -22,8 +22,8 @@ plot(agged_data,
      type="l",
      col="black",
      main="Total Emissions over years for Baltimore",
-     ylab="Total Emissions (in kilotons)",
+     ylab="Total Emissions (in tons)",
      xlab='Year',
-     ylim=c(0,8000)
+     ylim=c(0,4000)
 )
 dev.off()
