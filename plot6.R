@@ -12,11 +12,11 @@ NEI <- tbl_df(readRDS("./data/summarySCC_PM25.rds"))%>%
 #NEI_SCC <- inner_join(NEI,SCC,by= c("SCC" = "SCC"))
 
 agged_data <- inner_join(NEI,SCC,by= c("SCC" = "SCC"))  %>%
-    select (year,fips,Emissions) %>%
-    group_by(year,fips)  %>%
-    summarize(total_emissions=sum(Emissions)) %>%
-    distinct(year,fips,total_emissions)%>%
-    mutate(total_emissions= total_emissions)
+    select (year,fips,Emissions) #%>%
+    #group_by(year,fips)  %>%
+    #summarize(total_emissions=sum(Emissions)) %>%
+    #distinct(year,fips,total_emissions)%>%
+    #mutate(total_emissions= total_emissions)
 
 png(filename = "plot6.png",
     width = 480, height = 480, units = "px", pointsize = 12,
@@ -24,14 +24,13 @@ png(filename = "plot6.png",
     type = c("windows", "cairo", "cairo-png"))
 
 print(qplot(year,
-            total_emissions,
+            Emissions,
             data=agged_data,
             color= "red",
             facets= . ~ fips,
-            geom="line",
+            geom="boxplot",
             main="Total Emission of PM2.5 by Vehicle sources",
             ylab='Total Emission of PM2.5 in tons',
             xlab='Year'))
-
 
 dev.off()
